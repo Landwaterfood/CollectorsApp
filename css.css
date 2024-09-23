@@ -1,7 +1,10 @@
 body {
     background-color: #00000000;
 }
-
+.container {
+    width: 90%;
+    background-color: antiquewhite;
+}
 .navbar {
     display: flex;
     overflow: hidden;
