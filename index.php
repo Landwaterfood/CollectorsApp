@@ -1,9 +1,10 @@
+<?php require_once 'php.php';
+$pigments = fetchPigmentData()?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
 
-    <?php require_once 'php.php'; ?>
     <link rel="stylesheet" href="modern-normalize.css">
     <link rel="stylesheet" href="stylesheet.css">
     <meta name = "viewpoint" content = "width = device - width, initial-scale=1.0">
@@ -30,21 +31,27 @@
         </tr>
         </thead>
         <tbody>
-            <?php foreach ($collection as $pigment) : ?>
-            <tr>
-                <td><?= htmlspecialchars($pigment['id']); ?></td>
-                <td><?= htmlspecialchars($pigment['name']); ?></td>
-                <td><?= htmlspecialchars($pigment['color']); ?></td>
-                <td><?= htmlspecialchars($pigment['HEX']); ?></td>
-                <td><?= htmlspecialchars($pigment['Geology']); ?></td>
-                <td><img src="<?= htmlspecialchars($pigment['image_closeup']); ?>" alt="Closeup view"></td>
-                <td><img src="<?= htmlspecialchars($pigment['image_site']); ?>" alt="location view" ></td>
-                <td><?= htmlspecialchars($pigment['country']); ?></td>
-                <td><?= htmlspecialchars($pigment['town']); ?></td>
-                <td><?= htmlspecialchars($pigment['coordinateslat']); ?></td>
-                <td><?= htmlspecialchars($pigment['coordinateslong']); ?></td>
-            </tr>
-            <?php endforeach; ?>
+            <?php if (!empty($pigment)) : ?>
+                <?php foreach ($pigments as $pigment) : ?>
+                <tr>
+                    <td><?= htmlspecialchars($pigment['id']); ?></td>
+                    <td><?= htmlspecialchars($pigment['name']); ?></td>
+                    <td><?= htmlspecialchars($pigment['color']); ?></td>
+                    <td><?= htmlspecialchars($pigment['HEX']); ?></td>
+                    <td><?= htmlspecialchars($pigment['Geology']); ?></td>
+                    <td><img src="<?= htmlspecialchars($pigment['image_closeup']); ?>" alt="Closeup view"></td>
+                    <td><img src="<?= htmlspecialchars($pigment['image_site']); ?>" alt="location view" ></td>
+                    <td><?= htmlspecialchars($pigment['country']); ?></td>
+                    <td><?= htmlspecialchars($pigment['town']); ?></td>
+                    <td><?= htmlspecialchars($pigment['coordinateslat']); ?></td>
+                    <td><?= htmlspecialchars($pigment['coordinateslong']); ?></td>
+                </tr>
+                <?php endforeach; ?>
+            <?php else : ?>
+                <TR>
+                    <Td colspan="11">"no data";</Td>
+                </TR>
+        <?php endif; ?>
         </tbody>
     </table>
 
