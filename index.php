@@ -1,5 +1,7 @@
 <?php require_once 'php.php';
-$pigments = fetchPigmentData()?>
+$pigments = fetchPigmentData()
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
