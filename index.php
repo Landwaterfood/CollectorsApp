@@ -30,20 +30,21 @@
         </tr>
         </thead>
         <tbody>
-            <?php foreach ($collection as $pigment) : ?>
-            <tr>
-                <td><?= htmlspecialchars($pigment['id']); ?></td>
-                <td><?= htmlspecialchars($pigment['name']); ?></td>
-                <td><?= htmlspecialchars($pigment['color']); ?></td>
-                <td><?= htmlspecialchars($pigment['HEX']); ?></td>
-                <td><?= htmlspecialchars($pigment['Geology']); ?></td>
-                <td><img src="<?= htmlspecialchars($pigment['image_closeup']); ?>" alt="Closeup view"></td>
-                <td><img src="<?= htmlspecialchars($pigment['image_site']); ?>" alt="location view" ></td>
-                <td><?= htmlspecialchars($pigment['country']); ?></td>
-                <td><?= htmlspecialchars($pigment['town']); ?></td>
-                <td><?= htmlspecialchars($pigment['coordinateslat']); ?></td>
-                <td><?= htmlspecialchars($pigment['coordinateslong']); ?></td>
-            </tr>
+            <?php foreach ($collection as $pigment) :
+                ?>
+                <tr>
+                    <td><?= $pigment['id']; ?></td>
+                    <td><?= $pigment['name']; ?></td>
+                    <td><?= $pigment['color']; ?></td>
+                    <td><?= $pigment['HEX']; ?></td>
+                    <td><?= $pigment['Geology']; ?></td>
+                    <td><img src="<?= $pigment['image_closeup']; ?>" alt="Closeup view"></td>
+                    <td><img src="<?= $pigment['image_site']; ?>" alt="location view" ></td>
+                    <td><?= $pigment['country']; ?></td>
+                    <td><?= $pigment['town']; ?></td>
+                    <td><?= $pigment['coordinateslat']; ?></td>
+                    <td><?= $pigment['coordinateslong']; ?></td>
+                </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
