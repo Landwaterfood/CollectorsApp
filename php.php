@@ -32,25 +32,28 @@ function fetchPigmentData()
     }
 }
 
-function createTable($collection)
+function createTable()
 {
+    $collection = fetchPigmentData();
+
+    $result= "";
     foreach ($collection as $pigment)
-    {$collection = fetchPigmentData();
-
-
-        <tr>
-                        <td > is_null($pigment['id']) ? 'NULL' : $pigment['id']; </td >
-                        <td > is_null($pigment['name']) ? 'NULL' : $pigment['name']; </td >
-                        <td > is_null($pigment['color']) ? 'Null' : $pigment['color']; </td >
-                        <td > is_null($pigment['HEX']) ? 'Null' : $pigment['Hex'];</td >
-                        <td > is_null($pigment['Geology']) ? 'NULL' : $pigment['geology'];  </td >
-                        <td > is_null($pigment['image_closeup']) ? 'NULL' : '<img src="' . $pigment['image_closeup'] . '" alt="Closeup view">';</td >
-                        <td > is_null($pigment['image_site']) ? 'NULL' : '<img src="' . $pigment['image_site'] . '" alt="Site view">'; </td >
-                        <td > is_null($pigment['country']) ? 'Null' : $pigment['country'];</td >
-                        <td > is_null($pigment['town']) ? 'Null' : $pigment['town']; </td >
-                        <td > is_null($pigment['coordinateslat']) ? 'NULL' : $pigment['coordinateslat'];</td >
-                        <td > is_null($pigment['coordinateslong']) ? 'NULL' : $pigment['coordinateslong']; </td >
-                    </tr >
+    {
+        $result .='<tr>';
+        $result .='<td>' . (is_null($pigment['id']) ? 'NULL' : $pigment['id']) . '</td>';
+        $result .='<td >' . is_null($pigment['id']) ? 'NULL' : $pigment['id'] . '</td >';
+        $result .='<td >' . is_null($pigment['name']) ? 'NULL' : $pigment['name'] .'</td >';
+        $result .='<td >' . is_null($pigment['color']) ? 'Null' : $pigment['color'] .'</td >';
+        $result .='<td >' . is_null($pigment['HEX']) ? 'Null' : $pigment['Hex'] . '</td >';
+        $result .='<td >' . is_null($pigment['Geology']) ? 'NULL' : $pigment['geology'] .  '</td >';
+        $result .='<td >' . is_null($pigment['image_closeup']) ? 'NULL' : '<img src="' . $pigment['image_closeup'] . '" alt="Closeup view">' .'</td >';
+        $result .='<td >' . is_null($pigment['image_site']) ? 'NULL' : '<img src="' . $pigment['image_site'] . '" alt="Site view">' . '</td >';
+        $result .='<td >' . is_null($pigment['country']) ? 'Null' : $pigment['country'] .'</td >';
+        $result .='<td >' . is_null($pigment['town']) ? 'Null' : $pigment['town'] . '</td >';
+        $result .='<td >' . is_null($pigment['coordinateslat']) ? 'NULL' : $pigment['coordinateslat'] . '</td >';
+        $result .='<td >' . is_null($pigment['coordinateslong']) ? 'NULL' : $pigment['coordinateslong'] . '</td >';
+        $result .='</tr >';
     }
+    return $result;
 
 }
