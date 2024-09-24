@@ -32,7 +32,7 @@ $collection= fetchPigmentData()
         </tr>
         </thead>
         <tbody>
-        <?php createTable($collection) ?>
+        <?php echo createTable() ?>
         </tbody>
     </table>
 
