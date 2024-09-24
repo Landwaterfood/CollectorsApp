@@ -1,21 +1,56 @@
 <?php
-
-
-    try {
+function getConnected()
+{
+    try
+    {
         $connection = new PDO(
             'mysql:host=DB;dbname=collectorapp',
             'root',
             'password'
         );
         $connection->setAttribute(PDO:: ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-        $query = $connection->prepare('SELECT `id`, `name`, `color`, `HEX`, `Geology`, `image_closeup`, `image_site`, `country`, `town`, `coordinateslat`, `coordinateslong` FROM `MOCK_DATA`');
-        $result = $query->execute(); //execute does it and tells you if it works or not
-        $collection= $query->fetchALL();
-    } catch (PDOException $e) {
+        return $connection;
+
+    } catch (PDOException $e)
+    {
         echo 'connection error: ' . $e->getMessage();
         return [];
     }
+}
+
+function fetchPigmentData()
+{
+    $connection = getConnected();
+    try {
+        $query = $connection->prepare('SELECT `id`, `name`, `color`, `HEX`, `Geology`, `image_closeup`, `image_site`, `country`, `town`, `coordinateslat`, `coordinateslong` FROM `MOCK_DATA`');
+        $query->execute();
+        return $query->fetchALL();
+
+    } catch (PDOException $e){
+        echo 'fetch error:' . $e->getMessage();
+        return[];
+    }
+}
+
+function createTable($collection)
+{
+    foreach ($collection as $pigment)
+    {$collection = fetchPigmentData();
 
 
+        <tr>
+                        <td > is_null($pigment['id']) ? 'NULL' : $pigment['id']; </td >
+                        <td > is_null($pigment['name']) ? 'NULL' : $pigment['name']; </td >
+                        <td > is_null($pigment['color']) ? 'Null' : $pigment['color']; </td >
+                        <td > is_null($pigment['HEX']) ? 'Null' : $pigment['Hex'];</td >
+                        <td > is_null($pigment['Geology']) ? 'NULL' : $pigment['geology'];  </td >
+                        <td > is_null($pigment['image_closeup']) ? 'NULL' : '<img src="' . $pigment['image_closeup'] . '" alt="Closeup view">';</td >
+                        <td > is_null($pigment['image_site']) ? 'NULL' : '<img src="' . $pigment['image_site'] . '" alt="Site view">'; </td >
+                        <td > is_null($pigment['country']) ? 'Null' : $pigment['country'];</td >
+                        <td > is_null($pigment['town']) ? 'Null' : $pigment['town']; </td >
+                        <td > is_null($pigment['coordinateslat']) ? 'NULL' : $pigment['coordinateslat'];</td >
+                        <td > is_null($pigment['coordinateslong']) ? 'NULL' : $pigment['coordinateslong']; </td >
+                    </tr >
+    }
 
-
+}
