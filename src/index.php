@@ -8,29 +8,36 @@ $collection= fetchPigmentData()
     <link rel="stylesheet" href="modern-normalize.css">
     <link rel="stylesheet" href="stylesheet.css">
     <meta name = "viewport" content = "width = device - width, initial-scale=1.0">
-    <title>Pigment Collection App - </title>
+    <title>Pigment Collection App</title>
 </head>
 
 <body>
-<section class ="container">
-    <table class = "table">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>HEX</th>
-            <th>Mineral</th>
-            <th>Chemical</th>
-            <th>Description</th>
-            <th>Image</th>
-        </tr>
-        </thead>
-        <tbody>
-        <?php echo createTable() ?>
-        </tbody>
-    </table>
 
-</section>
+    <section class ="hero">
+
+        <div class ="container">
+
+            <table class = "table">
+                <thead class = "table_head">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Color</th>
+                    <th>HEX</th>
+                    <th>Mineral</th>
+                    <th>Chemical</th>
+                    <th>Description</th>
+                    <th>Image</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php echo createTable() ?>
+                </tbody>
+            </table>
+
+        </div>
+    </section>
+
 </body>
 
 </html>

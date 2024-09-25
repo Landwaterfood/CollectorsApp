@@ -1,0 +1,32 @@
+
+* {
+    font-family: "Courier New", monospace;
+}
+
+    html {
+        scroll-behavior: smooth;
+    }
+    .hero{
+        width: 100vh;
+        height: 100vh;
+    }
+
+    .container {
+        display: block;
+        width: 95vw;
+        height: 95vh;
+        background-color: #F8F1;
+        padding: 2.5%;
+        margin: 2.5%;
+
+    }
+    .table {
+        width: 95%;
+        height: 95%;
+    }
+
+    .table_head{
+
+
+    }
+}

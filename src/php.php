@@ -26,7 +26,9 @@ function fetchPigmentData() : array
 
     try {
         // Prepare an SQL query to select the relevant fields from the MOCK_DATA table
-        $query = $connection->prepare('SELECT `id`, `name`, `HEX`, `mineral`, `chemical`, `description`, `image_closeup` FROM `pigment`');
+        $query = $connection->prepare('SELECT pigment.id, pigment.name, pigment.HEX, pigment.mineral, pigment.chemical, pigment.description, pigment.image_closeup, color.name AS color_name
+            FROM pigment
+            INNER JOIN color color ON pigment.color_id = color.color_id');
         $query->execute();
         return $query->fetchALL();
 
@@ -37,6 +39,8 @@ function fetchPigmentData() : array
         return[];
     }
 }
+
+
 
 function createTable() : string
 {
@@ -49,6 +53,7 @@ function createTable() : string
         $result .= '<tr>' .
                     '<td>' . (is_null($pigment['id']) ? 'NULL' : htmlspecialchars($pigment['id'])) . '</td>' .
                     '<td>' . (is_null($pigment['name']) ? 'NULL' : htmlspecialchars($pigment['name'])) . '</td>' .
+                    '<td>' . (is_null($pigment['color_name']) ? 'NULL' : htmlspecialchars($pigment['color_name'])) . '</td>' .
                     '<td>' . (is_null($pigment['HEX']) ? 'NULL' : htmlspecialchars($pigment['HEX'])) . '</td>' .
                     '<td>' . (is_null($pigment['mineral']) ? 'NULL' : htmlspecialchars($pigment['mineral'])) . '</td>' .
                     '<td>' . (is_null($pigment['chemical']) ? 'NULL' : htmlspecialchars($pigment['chemical'])) . '</td>' .
