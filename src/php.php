@@ -1,5 +1,5 @@
 <?php
-function getConnected()
+function getConnected() : ?PDO
 {
     try
     {
@@ -11,28 +11,34 @@ function getConnected()
         $connection->setAttribute(PDO:: ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
         return $connection;
 
+
     } catch (PDOException $exception)
     {
         echo 'connection error: ' . $exception->getMessage();
-        return [];
+        return null ;
     }
 }
 
-function fetchPigmentData()
+function fetchPigmentData() : array
 {
+    // Establish a database connection
     $connection = getConnected();
+
     try {
-        $query = $connection->prepare('SELECT `id`, `name`, `color`, `HEX`, `Geology`, `image_closeup`, `image_site`, `country`, `town`, `coordinateslat`, `coordinateslong` FROM `MOCK_DATA`');
+        // Prepare an SQL query to select the relevant fields from the MOCK_DATA table
+        $query = $connection->prepare('SELECT `id`, `name`, `HEX`, `mineral`, `chemical`, `description`, `image_closeup` FROM `pigment`');
         $query->execute();
         return $query->fetchALL();
 
     } catch (PDOException $exception){
+        // In case of a database-related error, catch the exception and print an error message
         echo 'fetch error:' . $exception->getMessage();
+        // Return an empty array if there's an error
         return[];
     }
 }
 
-function createTable()
+function createTable() : string
 {
     $collection = fetchPigmentData(); // Get the data
     $result = ""; // Initialize an empty result string
@@ -40,19 +46,17 @@ function createTable()
     // Loop through each pigment in the collection
     foreach ($collection as $pigment)
     {
-        $result .= '<tr>';
-        $result .= '<td>' . (is_null($pigment['id']) ? 'NULL' : htmlspecialchars($pigment['id'])) . '</td>';
-        $result .= '<td>' . (is_null($pigment['name']) ? 'NULL' : htmlspecialchars($pigment['name'])) . '</td>';
-        $result .= '<td>' . (is_null($pigment['color']) ? 'NULL' : htmlspecialchars($pigment['color'])) . '</td>';
-        $result .= '<td>' . (is_null($pigment['HEX']) ? 'NULL' : htmlspecialchars($pigment['HEX'])) . '</td>';
-        $result .= '<td>' . (is_null($pigment['Geology']) ? 'NULL' : htmlspecialchars($pigment['Geology'])) . '</td>';
-        $result .= '<td>' . (is_null($pigment['image_closeup']) ? 'NULL' : '<img src="' . htmlspecialchars($pigment['image_closeup']) . '" alt="Closeup view">') . '</td>';
-        $result .= '<td>' . (is_null($pigment['image_site']) ? 'NULL' : '<img src="' . htmlspecialchars($pigment['image_site']) . '" alt="Site view">') . '</td>';
-        $result .= '<td>' . (is_null($pigment['country']) ? 'NULL' : htmlspecialchars($pigment['country'])) . '</td>';
-        $result .= '<td>' . (is_null($pigment['town']) ? 'NULL' : htmlspecialchars($pigment['town'])) . '</td>';
-        $result .= '<td>' . (is_null($pigment['coordinateslat']) ? 'NULL' : htmlspecialchars($pigment['coordinateslat'])) . '</td>';
-        $result .= '<td>' . (is_null($pigment['coordinateslong']) ? 'NULL' : htmlspecialchars($pigment['coordinateslong'])) . '</td>';
-        $result .= '</tr>';
+        $result .= '<tr>' .
+                    '<td>' . (is_null($pigment['id']) ? 'NULL' : htmlspecialchars($pigment['id'])) . '</td>' .
+                    '<td>' . (is_null($pigment['name']) ? 'NULL' : htmlspecialchars($pigment['name'])) . '</td>' .
+                    '<td>' . (is_null($pigment['HEX']) ? 'NULL' : htmlspecialchars($pigment['HEX'])) . '</td>' .
+                    '<td>' . (is_null($pigment['mineral']) ? 'NULL' : htmlspecialchars($pigment['mineral'])) . '</td>' .
+                    '<td>' . (is_null($pigment['chemical']) ? 'NULL' : htmlspecialchars($pigment['chemical'])) . '</td>' .
+                    '<td>' . (is_null($pigment['description']) ? 'NULL' : htmlspecialchars($pigment['description'])) . '</td>' .
+                    '<td>' . (is_null($pigment['image_closeup']) || empty($pigment['image_closeup'])
+                ? 'No Image Available'
+                : '<img src="' . htmlspecialchars($pigment['image_closeup']) . '" alt="image" style="width:100px;height:auto;">') . '</td>' .
+                    '</tr>';
     }
 
     return $result;
