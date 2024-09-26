@@ -40,7 +40,6 @@
     }
 
     .pigment_item{
-        margin: 5%;
         margin-bottom: 5%;
         padding: 5%;
         background-color: #F8F1;
@@ -52,14 +51,17 @@
 .pigment_name{
     font-weight: bold;
 }
-.pigment_color_name
-.pigment_HEX
-.pigment_mineral
-.pigment_chemical
-.pigment_description
+.pigment_color_name{}
+.pigment_HEX{}
+.pigment_mineral{}
+.pigment_chemical{}
+.pigment_description{}
 
 .pigment_image_closeup{
-    width: 80pt;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
     height: auto;
 }
 
