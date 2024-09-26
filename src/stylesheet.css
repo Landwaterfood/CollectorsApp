@@ -11,19 +11,20 @@
         height: 100vh;
     }
 
+    .title{
+        padding-left: 10%;
+
+    }
+
     .container {
         display: block;
         width: 95vw;
         height: 95vh;
-        background-color: #F8F1;
-        padding: 2%;
+
+        padding-right: 2%;
         margin: 2%;
-
     }
 
-    .h1 {
-        padding-left: 8%;
-    }
 
     .stattitle{
         display: inline-flex;
@@ -34,12 +35,14 @@
 
     }
     pigments{
-display: inline-flex;
+        display: inline-flex;
         margin-bottom: 10%;
     }
 
     .pigment_item{
-        margin-bottom: 10%;
+        margin: 2%;
+        padding: 5%;
+        background-color: #F8F1;
     }
 .pigment_id{
     font-weight: bold;

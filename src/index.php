@@ -13,7 +13,7 @@ $collection= fetchPigmentData()
 
 <body>
 <nav class="navbar">
-    <div class = "title "><a><h1>Pigmadex</h1></a></div>
+    <div class = "title "><h1>Pigmadex</h1></div>
 
 </nav>
 <section class ="hero">
