@@ -16,17 +16,47 @@
         width: 95vw;
         height: 95vh;
         background-color: #F8F1;
-        padding: 2.5%;
-        margin: 2.5%;
+        padding: 2%;
+        margin: 2%;
 
     }
-    .table {
-        width: 95%;
-        height: 95%;
+
+    .h1 {
+        padding-left: 8%;
     }
 
-    .table_head{
+    .stattitle{
+        display: inline-flex;
+        font-weight: bold;
+
+
 
 
     }
+    pigments{
+display: inline-flex;
+        margin-bottom: 10%;
+    }
+
+    .pigment_item{
+        margin-bottom: 10%;
+    }
+.pigment_id{
+    font-weight: bold;
+
+
 }
+.pigment_name
+.pigment_color_name
+.pigment_HEX
+.pigment_mineral
+.pigment_chemical
+.pigment_description
+.pigment_image_closeup
+
+    .bold{
+        font-style: italic;
+
+
+
+    }

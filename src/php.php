@@ -25,7 +25,6 @@ function fetchPigmentData() : array
     $connection = getConnected();
 
     try {
-        // Prepare an SQL query to select the relevant fields from the MOCK_DATA table
         $query = $connection->prepare('SELECT pigment.id, pigment.name, pigment.HEX, pigment.mineral, pigment.chemical, pigment.description, pigment.image_closeup, color.name AS color_name
             FROM pigment
             INNER JOIN color color ON pigment.color_id = color.color_id');
@@ -40,29 +39,26 @@ function fetchPigmentData() : array
     }
 }
 
-
-
-function createTable() : string
+function createpigmaDIVS() : string
 {
-    $collection = fetchPigmentData(); // Get the data
-    $result = ""; // Initialize an empty result string
+    $collection = fetchPigmentData();
+    $result = "";
 
-    // Loop through each pigment in the collection
     foreach ($collection as $pigment)
     {
-        $result .= '<tr>' .
-                    '<td>' . (is_null($pigment['id']) ? 'NULL' : htmlspecialchars($pigment['id'])) . '</td>' .
-                    '<td>' . (is_null($pigment['name']) ? 'NULL' : htmlspecialchars($pigment['name'])) . '</td>' .
-                    '<td>' . (is_null($pigment['color_name']) ? 'NULL' : htmlspecialchars($pigment['color_name'])) . '</td>' .
-                    '<td>' . (is_null($pigment['HEX']) ? 'NULL' : htmlspecialchars($pigment['HEX'])) . '</td>' .
-                    '<td>' . (is_null($pigment['mineral']) ? 'NULL' : htmlspecialchars($pigment['mineral'])) . '</td>' .
-                    '<td>' . (is_null($pigment['chemical']) ? 'NULL' : htmlspecialchars($pigment['chemical'])) . '</td>' .
-                    '<td>' . (is_null($pigment['description']) ? 'NULL' : htmlspecialchars($pigment['description'])) . '</td>' .
-                    '<td>' . (is_null($pigment['image_closeup']) || empty($pigment['image_closeup'])
+        $result .= '<div class = "pigment_item">' .
+                    '<div class = "pigments" "pigment_id">' . '<div class = "stattitle">ID: #</div>' . (is_null($pigment['id']) ? 'NULL' : htmlspecialchars($pigment['id'])) . '</div>' .
+                    '<div class = "pigments" "pigment_name">' . '<div class = "stattitle">name:</div>' .  (is_null($pigment['name']) ? 'NULL' : htmlspecialchars($pigment['name'])) . '</div>' .
+                    '<div class = "pigments" "pigment_color_name">'. '<div class = "stattitle">color: </div>' . (is_null($pigment['color_name']) ? 'NULL' : htmlspecialchars($pigment['color_name'])) . '</div>' .
+                    '<div class = "pigments" "pigment_HEX">' . '<div class = "stattitle">HEX: </div>'. (is_null($pigment['HEX']) ? 'NULL' : htmlspecialchars($pigment['HEX'])) . '</div>' .
+                    '<div class = "pigments" "pigment_mineral">' . '<div class = "stattitle">mineral: </div>'.(is_null($pigment['mineral']) ? 'NULL' : htmlspecialchars($pigment['mineral'])) . '</div>' .
+                    '<div class = "pigments" "pigment_chemical">' . '<div class = "stattitle">chemical: </div>' . (is_null($pigment['chemical']) ? 'NULL' : htmlspecialchars($pigment['chemical'])) . '</div>' .
+                    '<div class = pigment_description">' . '<div class = "stattitle">description: </div>' . (is_null($pigment['description']) ? 'NULL' : htmlspecialchars($pigment['description'])) . '</div>' .
+                    '<div class=  "pigment_image_closeup">' . (is_null($pigment['image_closeup']) || empty($pigment['image_closeup'])
                 ? 'No Image Available'
-                : '<img src="' . htmlspecialchars($pigment['image_closeup']) . '" alt="image" style="width:100px;height:auto;">') . '</td>' .
-                    '</tr>';
+                : '<img src="' . htmlspecialchars($pigment['image_closeup']) . '" alt="image" style="width:100px;height:auto;">') . '</div>' .
+                    '</div>';
     }
-
     return $result;
 }
+

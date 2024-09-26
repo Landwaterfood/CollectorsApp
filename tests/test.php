@@ -6,7 +6,7 @@ require_once 'php.php';
 
 class CreateTableTest extends TestCase
 {
-    public function testCreateTableData(): void
+    public function testcreatepigmaDIVSData(): void
     {
         $mockData = [
             [
@@ -14,28 +14,29 @@ class CreateTableTest extends TestCase
                 'name' => 'Red Ochre',
                 'color' => 'Red',
                 'HEX' => '#FF0000',
-                'Geology' => 'Iron Oxide',
+                'Mineral' => 'Iron Oxide',
                 'image_closeup' => 'closeup.jpg'
             ]
         ];
 
-        $expectedOutput =  '<tr>' .
-                           '<td>1</td>' .
-                           '<td>Red Ochre</td>' .
-                           '<td>Red</td>' .
-                           '<td>#FF0000</td>' .
-                            '<td>Iron Oxide</td>' .
+        $expectedOutput =  '<div>' .
+                           '<div>1</div>' .
+                           '<div>Red Ochre</div>' .
+                           '<div>Red</div>' .
+                           '<div>#FF0000</div>' .
+                            '<div>Iron Oxide</div>' .
+                            '<div></div>'
                             '<td><img src="closeup.jpg" alt="Closeup view"></td>'.
-                            '</tr>';
+                            '</div>';
 
         // Call the function with mock data
-        $actualOutput = createTable($mockData);
+        $actualOutput = createpigmaDIVS($mockData);
 
         // Assert the result matches the expected output
         $this->assertEquals($expectedOutput, $actualOutput);
     }
 
-    public function testCreateTableWithNullValues(): void
+    public function testcreatepigmaDIVSWithNullValues(): void
     {
         // Mocked pigment data with some null values
         $mockData = [
@@ -61,14 +62,14 @@ class CreateTableTest extends TestCase
                             '</tr>';
 
         // Call the function with mock data
-        $actualOutput = createTable($mockData);
+        $actualOutput = createpigmaDIVS($mockData);
 
         // Assert the result matches the expected output
         $this->assertEquals($expectedOutput, $actualOutput);
     }
 
     // Test with malformed data
-    public function testCreateTableWithMalformedData(): void
+    public function testcreatepigmaDIVSWithMalformedData(): void
     {
         // Malformed data: Missing some keys and incorrect types
         $mockData = [
@@ -93,7 +94,7 @@ class CreateTableTest extends TestCase
             '</tr>';
 
         // Call the function with malformed data
-        $actualOutput = createTable($mockData);
+        $actualOutput = createpigmaDIVS($mockData);
 
         // Assert the result matches the expected output
         $this->assertEquals($expectedOutput, $actualOutput);

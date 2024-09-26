@@ -12,32 +12,18 @@ $collection= fetchPigmentData()
 </head>
 
 <body>
+<nav class="navbar">
+    <div class = "title "><a><h1>Pigmadex</h1></a></div>
 
-    <section class ="hero">
+</nav>
+<section class ="hero">
 
         <div class ="container">
 
-            <table class = "table">
-                <thead class = "table_head">
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Color</th>
-                    <th>HEX</th>
-                    <th>Mineral</th>
-                    <th>Chemical</th>
-                    <th>Description</th>
-                    <th>Image</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php echo createTable() ?>
-                </tbody>
-            </table>
+                <?php echo createpigmaDIVS() ?>
 
         </div>
     </section>
-
 </body>
 
 </html>
