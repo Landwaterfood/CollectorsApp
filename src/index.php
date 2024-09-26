@@ -19,9 +19,7 @@ $collection= fetchPigmentData()
 <section class ="hero">
 
         <div class ="container">
-
-                <?php echo createpigmaDIVS() ?>
-
+                <?php echo createpigmaDIVS($collection) ?>
         </div>
     </section>
 </body>

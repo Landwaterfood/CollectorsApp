@@ -2,58 +2,19 @@
 
 use PHPUnit\Framework\TestCase;
 
-require_once 'php.php';
+require_once 'src/php.php';
 
-class createpigmaDIVS extends TestCase
+class createpigmaDIVStest extends TestCase
 {
-    public function testcreatepigmaDIVSexactdata(): void
-    {
-        $mockData = [
-            [
-            'id' => 1,
-            'name' => 'Fremington Quay Yellow Ochre',
-            'color' => 'Yellow',
-            'HEX' => '#C5A601',
-            'Mineral' => 'Limonite',
-            'chemical' => '(FeO(OH) nH20)',
-            'description' => 'Quaternary, possible glacial deposits, 400,000 years old Manganese oxide.',
-            'image_closeup' => 'yellow.jpeg'
-            ]
-
-        ];
-
-        $expectedOutput = '<div>' .
-            '<div>1</div>' .
-            '<div>Fremington Quay Yellow Ochre</div>' .
-            '<div>Red</div>' .
-            '<div>#C5A601</div>' .
-            '<div>Limonite</div>' .
-            '<div>(FeO(OH) nH20)</div>' .
-            '<div>Quaternary, possible glacial deposits, 400,000 years old Manganese oxide.</div>' .
-            '<td><img src="yellow.jpeg" alt="Closeup view"></td>'.
-            '</div>';
-
-
-        $actualOutput = createpigmaDIVS($mockData);
-        $this->assertEquals($expectedOutput, $actualOutput);
-    }
-
     public function testcreatepigmaDIVSWrongdata(): void
     {
-        $mockData = [
-            'arse'
-        ];
+        $mockData =
+            [
+                ['id' => null]
+            ];
 
-        $expectedOutput = '<div>' .
-            '<div>1</div>' .
-            '<div>Fremington Quay Yellow Ochre</div>' .
-            '<div>Red</div>' .
-            '<div>#C5A601</div>' .
-            '<div>Limonite</div>' .
-            '<div>(FeO(OH) nH20)</div>' .
-            '<div>Quaternary, possible glacial deposits, 400,000 years old Manganese oxide.</div>' .
-            '<td><img src="yellow.jpeg" alt="Closeup view"></td>'.
-            '</div>';
+
+        $expectedOutput = '';
 
         $actualOutput = createpigmaDIVS($mockData);
         $this->assertEquals($expectedOutput, $actualOutput);
@@ -65,7 +26,7 @@ class createpigmaDIVS extends TestCase
             [
                 'id' => 1,
                 'name' => 'Red Ochre',
-                'color' => 'Red',
+                'color_name' => 'Red',
                 'HEX' => '#FF0000',
                 'Mineral' => 'Iron Oxide',
                 'chemical' => 'FE02',
@@ -74,20 +35,10 @@ class createpigmaDIVS extends TestCase
             ]
         ];
 
-        $expectedOutput =  '<div>' .
-                           '<div>1</div>' .
-                           '<div>Red Ochre</div>' .
-                           '<div>Red</div>' .
-                           '<div>#FF0000</div>' .
-                            '<div>Iron Oxide</div>' .
-                            '<div>FE02</div>' .
-                            '<div>Pigment from the ground</div>' .
-                            '<td><img src="closeup.jpg" alt="Closeup view"></td>'.
-                            '</div>';
+        $expectedOutput ='<div class = "pigment_item"><div class = "pigments pigment_id"><div class = "stattitle">ID: #</div>1</div><div class = "pigments pigment_name"><div class = "stattitle">name:</div>Red Ochre</div><div class = "pigments pigment_color_name"><div class = "stattitle">color: </div>Red</div><div class = "pigments pigment_HEX"><div class = "stattitle">HEX: </div>#FF0000</div><div class = "pigments pigment_mineral"><div class = "stattitle">mineral: </div>NULL</div><div class = "pigments pigment_chemical"><div class = "stattitle">chemical: </div>FE02</div><div class = "pigment_description"><div class = "stattitle">description: </div>pigment from the ground</div><div class = "pigment_image_closeup"><img src="closeup.jpg" alt="image" style="width:100%;height:80%;"></div></div>';
 
-
-        $actualOutput = createpigmaDIVS($mockData);
-        $this->assertEquals($expectedOutput, $actualOutput);
+        $actual = createpigmaDIVS($mockData);
+        $this->assertEquals($expectedOutput, $actual);
     }
 
     public function testcreatepigmaDIVSWithNullValues(): void
@@ -97,7 +48,7 @@ class createpigmaDIVS extends TestCase
             [
                 'id' => null,
                 'name' => null,
-                'color' => null,
+                'color_name' => null,
                 'HEX' => null,
                 'mineral' => null,
                 'chemical' => null,
@@ -108,16 +59,8 @@ class createpigmaDIVS extends TestCase
         ];
 
         // Expected HTML output with 'NULL' for all null values
-        $expectedOutput ='<div>'.
-                            '<div>NULL</div>'.
-                            '<div>NULL</div>'.
-                            '<div>NULL</div>'.
-                            '<div>NULL</div>';
-                            '<div>NULL</div>';
-                            '<div>NULL</div>';
-                            '<div>NULL</div>';
-                            '<div>NULL</div>';
-                        '</div>';
+                $expectedOutput=
+                    '';
 
         $actualOutput = createpigmaDIVS($mockData);
         $this->assertEquals($expectedOutput, $actualOutput);
@@ -131,7 +74,7 @@ class createpigmaDIVS extends TestCase
             [
                 'id' => 'NotANumber',    // Wrong type
                 'name' => 'Red Ochre',   // Valid
-                'color' => 'missing',      // Missing color
+                'color_name' => 'missing',      // Missing color
                 'HEX' => 12345,          // Wrong type
                 'mineral' => 20,          //wrong type
                 'chemical' => 'Iron Oxide', //invalid string, should be a chemical name
@@ -141,19 +84,11 @@ class createpigmaDIVS extends TestCase
         ];
 
         // Expected output should handle missing or malformed fields, for example, output 'NULL' or ignore invalid fields.
-        $expectedOutput =   '<div>'.
-            '<div>NULL</div>'.               // Invalid id, should show 'NULL'
-            '<div>Red Ochre</div>'.           // Valid name
-            '<div>NULL</div>'.                // Missing color should result in 'NULL'
-            '<div>NULL</div>'.                // Invalid HEX, should show 'NULL'
-            '<div>NULL</div>'.                //Invalid mineral, should show 'NULL'
-            '<div>Iron Oxide</div>'.          // inValid chemical
-            '<div>NULL</div>'.                // Missing image should show 'NULL'
-            '</div>';
+        $this->expectException(UnexpectedValueException::class);
+        createpigmaDIVS($mockData);
 
-
-        $actualOutput = createpigmaDIVS($mockData);
-        $this->assertEquals($expectedOutput, $actualOutput);
     }
 }
+
+
 

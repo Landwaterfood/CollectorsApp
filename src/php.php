@@ -10,8 +10,6 @@ function getConnected() : ?PDO
         );
         $connection->setAttribute(PDO:: ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
         return $connection;
-
-
     } catch (PDOException $exception)
     {
         echo 'connection error: ' . $exception->getMessage();
@@ -38,33 +36,49 @@ function fetchPigmentData() : array
         return[];
     }
 }
-
-function createpigmaDIVS() : string
+function createpigmaDIVS(array $collection = null): string
 {
-    $collection = fetchPigmentData();
+    if (empty($collection) || !is_array($collection)) {
 
-    if (empty($collection)) {
-        return '<div>No pigment data available.</div>';
+
+        return '<div>Invalid pigment data.</div>';
     }
-
-
     $result = "";
 
-    foreach ($collection as $pigment)
-    {
-        $result .= '<div class = "pigment_item">' .
-                    '<div class = "pigments pigment_id">' . '<div class = "stattitle">ID: #</div>' . (is_null($pigment['id']) ? 'NULL' : htmlspecialchars($pigment['id'])) . '</div>' .
-                    '<div class = "pigments pigment_name">' . '<div class = "stattitle">name:</div>' .  (is_null($pigment['name']) ? 'NULL' : htmlspecialchars($pigment['name'])) . '</div>' .
-                    '<div class = "pigments pigment_color_name">'. '<div class = "stattitle">color: </div>' . (is_null($pigment['color_name']) ? 'NULL' : htmlspecialchars($pigment['color_name'])) . '</div>' .
-                    '<div class = "pigments pigment_HEX">' . '<div class = "stattitle">HEX: </div>'. (is_null($pigment['HEX']) ? 'NULL' : htmlspecialchars($pigment['HEX'])) . '</div>' .
-                    '<div class = "pigments pigment_mineral">' . '<div class = "stattitle">mineral: </div>'.(is_null($pigment['mineral']) ? 'NULL' : htmlspecialchars($pigment['mineral'])) . '</div>' .
-                    '<div class = "pigments pigment_chemical">' . '<div class = "stattitle">chemical: </div>' . (is_null($pigment['chemical']) ? 'NULL' : htmlspecialchars($pigment['chemical'])) . '</div>' .
-                    '<div class = pigment_description">' . '<div class = "stattitle">description: </div>' . (is_null($pigment['description']) ? 'NULL' : htmlspecialchars($pigment['description'])) . '</div>' .
-                    '<div class=  "pigment_image_closeup">' . (is_null($pigment['image_closeup']) || empty($pigment['image_closeup'])
+    foreach ($collection as $pigment) {
+        if(!isset($pigment['id']) || is_null($pigment['id'])){
+            return '';
+        }
+        if(!is_int($pigment['id'])){
+            throw new UnexpectedValueException('id was not a num');
+        }
+        if(!isset($pigment['name']) || is_null($pigment['name'])){
+            return '';
+        }
+        if(!isset($pigment['color_name']) || is_null($pigment['color_name'])){
+            return '';
+        }
+
+        $result .=
+            '<div class = "pigment_item">' .
+            '<div class = "pigments pigment_id">' . '<div class = "stattitle">ID: #</div>' . $pigment['id'] . '</div>' .
+            '<div class = "pigments pigment_name">' . '<div class = "stattitle">name:</div>' . $pigment['name']  . '</div>' .
+            '<div class = "pigments pigment_color_name">' . '<div class = "stattitle">color: </div>' . $pigment['color_name'] . '</div>' .
+            '<div class = "pigments pigment_HEX">' . '<div class = "stattitle">HEX: </div>' . (is_null($pigment['HEX']) ? 'NULL' : htmlspecialchars($pigment['HEX'])) . '</div>' .
+            '<div class = "pigments pigment_mineral">' . '<div class = "stattitle">mineral: </div>' . (is_null($pigment['mineral']) ? 'NULL' : htmlspecialchars($pigment['mineral'])) . '</div>' .
+            '<div class = "pigments pigment_chemical">' . '<div class = "stattitle">chemical: </div>' . (is_null($pigment['chemical']) ? 'NULL' : htmlspecialchars($pigment['chemical'])) . '</div>' .
+            '<div class = "pigment_description">' . '<div class = "stattitle">description: </div>' . (is_null($pigment['description']) ? 'NULL' : htmlspecialchars($pigment['description'])) . '</div>' .
+            '<div class = "pigment_image_closeup">' . (is_null($pigment['image_closeup']) || empty($pigment['image_closeup'])
                 ? 'No Image Available'
-                : '<img src="' . htmlspecialchars($pigment['image_closeup']) . '" alt="image" style="width:100px;height:auto;">') . '</div>' .
-                    '</div>';
+                : '<img src="' . htmlspecialchars($pigment['image_closeup']) . '" alt="image" style="width:100%;height:80%;">') . '</div>' .
+            '</div>';
     }
+
     return $result;
 }
+
+
+
+
+
 
