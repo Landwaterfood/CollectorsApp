@@ -1,0 +1,50 @@
+* {
+    font-family: "Courier New", monospace;
+}
+html {
+        scroll-behavior: smooth;
+}
+.hero{
+    width: 100vh;
+    eight: 100vh;
+}
+
+.title{
+    padding-left: 10%;
+
+}
+.container {
+    display: block;
+    width: 95vw;
+    height: 95vh;
+    padding-right: 2%;
+    margin: 2%;
+}
+
+.stattitle{
+    display: inline-flex;
+    font-weight: bold;
+
+    }
+pigments{
+    display: inline-flex;
+    padding: 2%;
+}
+
+.pigment_item{
+    margin-bottom: 5%;
+    padding: 5%;
+    background-color: #F8F1;
+}
+.pigment_id{
+    font-weight: bold;
+
+}
+.pigment_name{
+    font-weight: bold;
+}
+.pigment_image_closeup{
+    width: 80%;
+
+    height: auto;
+}
