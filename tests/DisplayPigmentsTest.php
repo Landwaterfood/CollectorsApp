@@ -4,9 +4,9 @@ use PHPUnit\Framework\TestCase;
 
 require_once 'src/php.php';
 
-class createpigmaDIVStest extends TestCase
+class DisplayPigmentsTest extends TestCase
 {
-    public function testcreatepigmaDIVSFailure(): void
+    public function testdisplayPigmentsDIVSFailure(): void
     {
         $mockData =
             [
@@ -16,10 +16,10 @@ class createpigmaDIVStest extends TestCase
 
         $expectedOutput = '';
 
-        $actualOutput = createpigmaDIVS($mockData);
+        $actualOutput = displayPigments($mockData);
         $this->assertEquals($expectedOutput, $actualOutput);
     }
-    public function testcreatepigmaDIVS_success(): void
+    public function testdisplayPigmentssuccess(): void
     {
         $mockData = [
             [
@@ -36,11 +36,11 @@ class createpigmaDIVStest extends TestCase
 
         $expectedOutput ='<div class = "pigment_item"><div class = "pigments pigment_id"><div class = "stattitle">ID: #</div>1</div><div class = "pigments pigment_name"><div class = "stattitle">name:</div>Red Ochre</div><div class = "pigments pigment_color_name"><div class = "stattitle">color: </div>Red</div><div class = "pigments pigment_HEX"><div class = "stattitle">HEX: </div>#FF0000</div><div class = "pigments pigment_mineral"><div class = "stattitle">mineral: </div>NULL</div><div class = "pigments pigment_chemical"><div class = "stattitle">chemical: </div>FE02</div><div class = "pigment_description"><div class = "stattitle">description: </div>pigment from the ground</div><div class = "pigment_image_closeup"><img src="closeup.jpg" alt="image"></div></div>';
 
-        $actual = createpigmaDIVS($mockData);
+        $actual = displayPigments($mockData);
         $this->assertEquals($expectedOutput, $actual);
     }
 
-    public function testcreatepigmaDIVSWithNullValues(): void
+    public function testdisplayPigmentsWithNullValues(): void
     {
         // Mocked pigment data with some null values
         $mockData = [
@@ -61,12 +61,12 @@ class createpigmaDIVStest extends TestCase
                 $expectedOutput=
                     '';
 
-        $actualOutput = createpigmaDIVS($mockData);
+        $actualOutput = displayPigments($mockData);
         $this->assertEquals($expectedOutput, $actualOutput);
     }
 
     // Test with malformed data
-    public function testcreatepigmaDIVSWithMalformedData(): void
+    public function testdisplayPigmentsWithMalformedData(): void
     {
         // Malformed data
         $mockData = [
@@ -84,7 +84,7 @@ class createpigmaDIVStest extends TestCase
 
         // Expected output should handle missing or malformed fields, for example, output 'NULL' or ignore invalid fields.
         $this->expectException(UnexpectedValueException::class);
-        createpigmaDIVS($mockData);
+        displayPigments($mockData);
 
     }
 }
