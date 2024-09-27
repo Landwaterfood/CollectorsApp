@@ -6,7 +6,7 @@ require_once 'src/php.php';
 
 class createpigmaDIVStest extends TestCase
 {
-    public function testcreatepigmaDIVSWrongdata(): void
+    public function testcreatepigmaDIVSFailure(): void
     {
         $mockData =
             [
@@ -19,8 +19,7 @@ class createpigmaDIVStest extends TestCase
         $actualOutput = createpigmaDIVS($mockData);
         $this->assertEquals($expectedOutput, $actualOutput);
     }
-
-    public function testcreatepigmaDIVSrightData(): void
+    public function testcreatepigmaDIVS_success(): void
     {
         $mockData = [
             [
@@ -35,7 +34,7 @@ class createpigmaDIVStest extends TestCase
             ]
         ];
 
-        $expectedOutput ='<div class = "pigment_item"><div class = "pigments pigment_id"><div class = "stattitle">ID: #</div>1</div><div class = "pigments pigment_name"><div class = "stattitle">name:</div>Red Ochre</div><div class = "pigments pigment_color_name"><div class = "stattitle">color: </div>Red</div><div class = "pigments pigment_HEX"><div class = "stattitle">HEX: </div>#FF0000</div><div class = "pigments pigment_mineral"><div class = "stattitle">mineral: </div>NULL</div><div class = "pigments pigment_chemical"><div class = "stattitle">chemical: </div>FE02</div><div class = "pigment_description"><div class = "stattitle">description: </div>pigment from the ground</div><div class = "pigment_image_closeup"><img src="closeup.jpg" alt="image" style="width:100%;height:80%;"></div></div>';
+        $expectedOutput ='<div class = "pigment_item"><div class = "pigments pigment_id"><div class = "stattitle">ID: #</div>1</div><div class = "pigments pigment_name"><div class = "stattitle">name:</div>Red Ochre</div><div class = "pigments pigment_color_name"><div class = "stattitle">color: </div>Red</div><div class = "pigments pigment_HEX"><div class = "stattitle">HEX: </div>#FF0000</div><div class = "pigments pigment_mineral"><div class = "stattitle">mineral: </div>NULL</div><div class = "pigments pigment_chemical"><div class = "stattitle">chemical: </div>FE02</div><div class = "pigment_description"><div class = "stattitle">description: </div>pigment from the ground</div><div class = "pigment_image_closeup"><img src="closeup.jpg" alt="image"></div></div>';
 
         $actual = createpigmaDIVS($mockData);
         $this->assertEquals($expectedOutput, $actual);

@@ -1,5 +1,6 @@
 <?php require_once 'php.php';
-$collection= fetchPigmentData()
+$db = getConnected();
+$collection= fetchPigmentData($db)
 
 ?>
 <!DOCTYPE html>
