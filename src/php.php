@@ -31,7 +31,7 @@ function fetchPigmentData($db) : array
         return[];
     }
 }
-function createpigmaDIVS(array $collection = null): string
+function displayPigments(array $collection = null): string
 {
     if (empty($collection) || !is_array($collection)) {
         return '<div>Invalid pigment data.</div>';
