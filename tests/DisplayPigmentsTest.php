@@ -13,7 +13,6 @@ class DisplayPigmentsTest extends TestCase
                 ['id' => null]
             ];
 
-
         $expectedOutput = '';
 
         $actualOutput = displayPigments($mockData);
@@ -53,7 +52,6 @@ class DisplayPigmentsTest extends TestCase
                 'chemical' => null,
                 'description' => null,
                 'image_closeup' => null,
-
             ]
         ];
 
@@ -85,9 +83,5 @@ class DisplayPigmentsTest extends TestCase
         // Expected output should handle missing or malformed fields, for example, output 'NULL' or ignore invalid fields.
         $this->expectException(UnexpectedValueException::class);
         displayPigments($mockData);
-
     }
 }
-
-
-
