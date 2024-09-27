@@ -69,7 +69,7 @@ function displayPigments(array $collection = null): string
             '<div class = "pigment_description">' . '<div class = "stattitle">description: </div>' . (is_null($pigment['description']) ? 'NULL' : htmlspecialchars($pigment['description'])) . '</div>' .
             '<div class = "pigment_image_closeup">' . (is_null($pigment['image_closeup']) || empty($pigment['image_closeup'])
                 ? 'No Image Available'
-                : '<img class= "pigment_image_closeup" src="' . htmlspecialchars($pigment['image_closeup']) . '" alt="image">') . '</div>' .
+                : '<img class= "pigment_image_closeup" src="src/IMAGES/' . htmlspecialchars($pigment['image_closeup']) . '" alt="image">') . '</div>' .
             '</div>';
     }
 
